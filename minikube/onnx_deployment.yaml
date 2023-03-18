@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onnx-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: onnx-app
+  template:
+    metadata:
+      labels:
+        app: onnx-app
+    spec:
+      containers:
+      - name: onnx-container
+        image: mcr.microsoft.com/onnxruntime/server
+        ports:
+          - containerPort: 8001
+          - containerPort: 50051
+        args:
+          - "--model_path=/models/model.onnx"
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: onnx-volume
+            mountPath: /models/
+      volumes:
+        - name: onnx-volume
+          hostPath:
+            path: /model/
+            type: Directory
