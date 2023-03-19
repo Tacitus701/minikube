@@ -10,4 +10,3 @@ spec:
     targetPort: 8001
     protocol: TCP
     name: onnx-port
-  type: ClusterIP

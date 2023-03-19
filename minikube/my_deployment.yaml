@@ -16,4 +16,4 @@ spec:
       - name: my-container
         image: nginxdemos/hello:latest
         ports:
-          - containerPort: 8000
+          - containerPort: 80
