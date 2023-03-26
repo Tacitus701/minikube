@@ -27,9 +27,8 @@ payload = {"inputs": inputs, "outputFilter": output_filters}
 ENDPOINT = 'http://localhost:80/v1/models/default/versions/1:predict'
 res = requests.post(ENDPOINT, headers=json_request_headers, data=json.dumps(payload))
 
-print(res.text)
 raw_data = json.loads(res.text)['outputs']['probabilities']['rawData']
 outputs = np.frombuffer(base64.b64decode(raw_data), dtype=np.float32)
 
 # Get index of max value
-print(np.argmax(outputs))
+print("Outputs probabilities :", np.round(outputs, 2))
